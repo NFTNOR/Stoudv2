@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Manual — STOUD</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0c;     --paper:#f1f1ef;   --body:#26262a;
+    --grey-1:#5c5c5e;  --grey-2:#6b6b6d;
+    --hair:rgba(11,11,12,.16);  --hair-soft:rgba(11,11,12,.06);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Lato',-apple-system,sans-serif;background:var(--paper);color:var(--body);
+    -webkit-font-smoothing:antialiased;min-height:100vh}
+  a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:2px}
+
+  /* ── layout ── */
+  .wrap{max-width:960px;margin:0 auto;padding:clamp(60px,8vh,100px) clamp(24px,5vw,80px) 120px}
+  .section{margin-top:clamp(70px,10vh,110px)}
+  .divider{border:none;border-top:1px solid var(--hair);margin:clamp(50px,7vh,80px) 0}
+
+  /* ── page header ── */
+  .page-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--grey-2);margin-bottom:18px}
+  .page-title{font-weight:900;font-size:clamp(42px,6vw,80px);letter-spacing:-.025em;
+    line-height:.92;color:var(--ink);margin-bottom:clamp(20px,3vh,32px)}
+  .page-intro{font-weight:300;font-size:clamp(16px,1.3vw,19px);line-height:1.7;
+    max-width:56ch;color:var(--grey-1)}
+
+  /* ── section headers ── */
+  .section-num{font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--grey-2);margin-bottom:10px}
+  .section-title{font-weight:400;font-size:clamp(22px,2.8vw,34px);
+    letter-spacing:.04em;text-transform:uppercase;color:var(--ink);
+    margin-bottom:clamp(24px,3.5vh,40px)}
+
+  /* ── principles ── */
+  .principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:clamp(20px,3vw,36px)}
+  .principle{padding:clamp(22px,3vw,32px);border:1px solid var(--hair);border-radius:12px}
+  .principle-icon{width:32px;height:32px;border-radius:50%;background:var(--ink);
+    margin-bottom:18px;display:flex;align-items:center;justify-content:center}
+  .principle-icon svg{fill:var(--paper)}
+  .principle h3{font-weight:700;font-size:15px;letter-spacing:.02em;color:var(--ink);margin-bottom:8px}
+  .principle p{font-weight:300;font-size:14px;line-height:1.65;color:var(--grey-1)}
+
+  /* ── colour ── */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px}
+  .swatch{border-radius:10px;overflow:hidden;border:1px solid var(--hair)}
+  .swatch-color{height:80px}
+  .swatch-info{padding:12px 14px;background:var(--paper)}
+  .swatch-name{font-size:12px;font-weight:700;color:var(--ink);letter-spacing:.04em}
+  .swatch-value{font-size:11px;color:var(--grey-2);margin-top:3px;letter-spacing:.03em}
+
+  /* ── typography ── */
+  .type-row{padding:clamp(20px,3vh,32px) 0;border-bottom:1px solid var(--hair);
+    display:flex;align-items:baseline;gap:clamp(20px,4vw,60px);flex-wrap:wrap}
+  .type-row:first-child{border-top:1px solid var(--hair)}
+  .type-meta{flex:0 0 160px;font-size:12px;color:var(--grey-2);letter-spacing:.06em;
+    text-transform:uppercase;line-height:1.6}
+  .type-sample{flex:1}
+
+  .t-display{font-weight:900;font-size:clamp(38px,5.4vw,66px);letter-spacing:-.02em;
+    line-height:.9;color:var(--ink)}
+  .t-title{font-weight:400;font-size:clamp(28px,3.8vw,50px);letter-spacing:.06em;
+    line-height:1;text-transform:uppercase;color:var(--ink)}
+  .t-nav{font-weight:400;font-size:clamp(14px,1.05vw,16px);letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink)}
+  .t-body{font-weight:300;font-size:clamp(16px,1.25vw,18px);line-height:1.72;color:var(--body)}
+  .t-small{font-weight:400;font-size:12px;letter-spacing:.1em;color:var(--grey-1)}
+  .t-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey-2)}
+
+  /* ── spacing ── */
+  .spacing-rows{display:flex;flex-direction:column;gap:12px}
+  .spacing-row{display:flex;align-items:center;gap:20px}
+  .spacing-bar-wrap{flex:1;height:20px;display:flex;align-items:center}
+  .spacing-bar{height:10px;background:var(--ink);border-radius:3px;opacity:.12}
+  .spacing-label{font-size:12px;color:var(--grey-2);letter-spacing:.06em;
+    flex:0 0 200px;text-align:right}
+  .spacing-val{font-size:11px;color:var(--grey-1);flex:0 0 140px;letter-spacing:.04em}
+
+  /* ── motion ── */
+  .ease-demo{display:flex;gap:clamp(16px,3vw,40px);flex-wrap:wrap;align-items:center}
+  .ease-box{width:52px;height:52px;border-radius:50%;background:var(--ink);cursor:pointer;
+    transition:transform .62s var(--ease)}
+  .ease-box:hover{transform:scale(1.6)}
+  .ease-info{flex:1;min-width:200px}
+  .ease-info code{display:block;font-family:monospace;font-size:13px;color:var(--grey-1);
+    background:rgba(11,11,12,.04);padding:10px 14px;border-radius:6px;
+    border:1px solid var(--hair);margin-top:10px;letter-spacing:.02em}
+
+  .timing-rows{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+  .timing-row{display:flex;align-items:center;gap:20px}
+  .timing-dot{width:10px;height:10px;border-radius:50%;background:var(--ink);
+    flex:0 0 auto;opacity:.35}
+  .timing-label{font-size:13px;color:var(--body);flex:1;letter-spacing:.02em}
+  .timing-val{font-size:12px;color:var(--grey-2);letter-spacing:.06em;font-family:monospace}
+
+  /* ── circle motif ── */
+  .circles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:clamp(16px,2.5vw,28px)}
+  .circle-card{border:1px solid var(--hair);border-radius:12px;
+    padding:clamp(20px,3vw,32px);position:relative;overflow:hidden}
+  .circle-card-demo{width:80px;height:80px;border-radius:50%;margin-bottom:16px}
+  .circle-card h4{font-weight:700;font-size:14px;color:var(--ink);letter-spacing:.02em;
+    margin-bottom:6px}
+  .circle-card p{font-weight:300;font-size:13px;line-height:1.6;color:var(--grey-1)}
+  .circle-card-where{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--grey-2);margin-top:12px}
+
+  /* demo circles */
+  .c-bg{background:var(--ink);opacity:.06}
+  .c-filled{background:var(--ink)}
+  .c-stroke{background:none;border:1px solid var(--hair);width:80px;height:80px;
+    border-radius:50%}
+  .c-dot{width:9px;height:9px;border-radius:50%;background:var(--ink);margin-bottom:16px}
+
+  /* ── grid system ── */
+  .grid-demo{border:1px solid var(--hair);border-radius:12px;overflow:hidden}
+  .grid-demo-inner{display:grid;grid-template-columns:1fr auto;gap:clamp(40px,6vw,120px);
+    padding:clamp(24px,4vw,48px);background:rgba(11,11,12,.02)}
+  .grid-col{background:rgba(11,11,12,.05);border-radius:6px;height:60px;
+    display:flex;align-items:center;padding:0 16px;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-1)}
+  .grid-col-nav{background:rgba(11,11,12,.05);border-radius:6px;height:60px;width:190px;
+    display:flex;align-items:center;padding:0 16px;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-1)}
+  .grid-note{padding:16px clamp(24px,4vw,48px);font-size:12px;color:var(--grey-2);
+    letter-spacing:.04em;border-top:1px solid var(--hair)}
+
+  /* ── voice & tone ── */
+  .voice-pairs{display:flex;flex-direction:column;gap:16px}
+  .voice-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .voice-no,.voice-yes{padding:16px 20px;border-radius:8px;font-size:14px;
+    line-height:1.6;font-weight:300}
+  .voice-no{background:rgba(11,11,12,.04);color:var(--grey-1);
+    border-left:3px solid rgba(11,11,12,.12)}
+  .voice-yes{background:rgba(11,11,12,.07);color:var(--ink);
+    border-left:3px solid var(--ink)}
+  .voice-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    display:block;margin-bottom:8px;font-weight:700}
+  .voice-no .voice-tag{color:var(--grey-2)}
+  .voice-yes .voice-tag{color:var(--ink)}
+
+  /* ── back link ── */
+  .back{display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+    color:var(--grey-2);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    margin-bottom:clamp(40px,6vh,64px);transition:color .3s}
+  .back:hover{color:var(--ink)}
+  .back-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+  /* ── footer ── */
+  .foot-manual{border-top:1px solid var(--hair);margin-top:80px;padding:24px 0;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .foot-manual-brand{font-weight:900;font-size:15px;letter-spacing:-.01em;color:var(--ink)}
+  .foot-manual-note{font-size:11px;color:var(--grey-2);letter-spacing:.1em;text-transform:uppercase}
+
+  /* ── bg ring ── */
+  .bg-ring{position:fixed;inset:0;pointer-events:none;display:grid;place-items:center;
+    opacity:.5;z-index:0}
+  .bg-ring div{position:absolute;border:1px solid var(--hair-soft);border-radius:50%;
+    width:min(150vh,150vw);aspect-ratio:1;animation:breathe 16s ease-in-out infinite}
+  @keyframes breathe{0%,100%{scale:1;opacity:.8}50%{scale:1.05;opacity:.45}}
+  .wrap{position:relative;z-index:1}
+
+  /* ── toc ── */
+  .toc{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:clamp(50px,7vh,80px)}
+  .toc a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-2);
+    text-decoration:none;padding:7px 14px;border:1px solid var(--hair);border-radius:40px;
+    transition:color .3s,border-color .3s}
+  .toc a:hover{color:var(--ink);border-color:var(--ink)}
+
+  @media(max-width:640px){
+    .type-row{flex-direction:column;gap:8px}
+    .type-meta{flex:none}
+    .voice-pair{grid-template-columns:1fr}
+    .grid-demo-inner{grid-template-columns:1fr}
+    .grid-col-nav{width:100%}
+    .spacing-label{flex:0 0 auto;text-align:left}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .bg-ring div{scale:1}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-ring"><div></div></div>
+
+<div class="wrap">
+
+  <a class="back" href="stoud-home-v6.html">
+    <span class="back-dot"></span>stoud.com
+  </a>
+
+  <p class="page-label">Internal reference</p>
+  <h1 class="page-title">Design<br>Manual.</h1>
+  <p class="page-intro">The visual and verbal principles that define STOUD across all touchpoints — digital, print, and motion. Use this as the single source of truth for design decisions.</p>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#principles">Principles</a>
+    <a href="#colour">Colour</a>
+    <a href="#typography">Typography</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#motion">Motion</a>
+    <a href="#circle">The Circle</a>
+    <a href="#layout">Layout</a>
+    <a href="#voice">Voice</a>
+  </nav>
+
+  <!-- ── 01 PRINCIPLES ── -->
+  <section class="section" id="principles">
+    <p class="section-num">01</p>
+    <h2 class="section-title">Principles</h2>
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" stroke="none"/></svg>
+        </div>
+        <h3>Precision over decoration</h3>
+        <p>Every element earns its place. Remove before adding. White space is not emptiness — it is confidence.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" fill="none" stroke="#f1f1ef" stroke-width="1.5"/></svg>
+        </div>
+        <h3>The circle as identity</h3>
+        <p>The circle recurs across all surfaces — the seal, transitions, cursor, menu. It is not decoration. It is structure.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 7h10M7 2v10" stroke="#f1f1ef" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <h3>Motion with meaning</h3>
+        <p>Animation is used to guide, reveal, and orient — never to entertain. If removing it breaks the experience, it was wrong.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" fill="#f1f1ef"/></svg>
+        </div>
+        <h3>Monochrome first</h3>
+        <p>The palette is ink on paper. Colour contrast carries meaning. When in doubt: black, white, and the spaces between.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11L7 3l4 8" stroke="#f1f1ef" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <h3>Responsive at its core</h3>
+        <p>All sizing uses <code style="font-size:11px">clamp()</code>. Nothing breaks. Layouts adapt without breakpoint hacks.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 4h10M2 7h7M2 10h5" stroke="#f1f1ef" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <h3>Accessible by default</h3>
+        <p>All colours meet WCAG AA. Motion respects <code style="font-size:11px">prefers-reduced-motion</code>. Skip links and focus states are never suppressed.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── 02 COLOUR ── -->
+  <section class="section" id="colour">
+    <p class="section-num">02</p>
+    <h2 class="section-title">Colour</h2>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0b0b0c"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Ink</div>
+          <div class="swatch-value">--ink · #0b0b0c</div>
+          <div class="swatch-value">Primary text, fills, marks</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f1f1ef;border-bottom:1px solid rgba(11,11,12,.08)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Paper</div>
+          <div class="swatch-value">--paper · #f1f1ef</div>
+          <div class="swatch-value">Background, reversed text</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#26262a"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Body</div>
+          <div class="swatch-value">--body · #26262a</div>
+          <div class="swatch-value">Body copy</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#5c5c5e"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Grey 1</div>
+          <div class="swatch-value">--grey-1 · #5c5c5e</div>
+          <div class="swatch-value">Nav, secondary text · 5.9:1 AA</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#6b6b6d"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Grey 2</div>
+          <div class="swatch-value">--grey-2 · #6b6b6d</div>
+          <div class="swatch-value">Labels, meta · 4.7:1 AA</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(11,11,12,.16);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Hair</div>
+          <div class="swatch-value">--hair · ink @ 16%</div>
+          <div class="swatch-value">Borders, dividers</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(11,11,12,.06)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Hair Soft</div>
+          <div class="swatch-value">--hair-soft · ink @ 6%</div>
+          <div class="swatch-value">Background rings, overlays</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── 03 TYPOGRAPHY ── -->
+  <section class="section" id="typography">
+    <p class="section-num">03</p>
+    <h2 class="section-title">Typography</h2>
+    <p style="font-size:13px;color:var(--grey-1);margin-bottom:32px;letter-spacing:.04em">
+      Typeface: <strong style="color:var(--ink)">Lato</strong> — Google Fonts · Weights 300, 400, 700, 900
+    </p>
+    <div>
+      <div class="type-row">
+        <div class="type-meta">Wordmark<br>900 · −0.025em</div>
+        <div class="type-sample"><span class="t-display">STOUD.</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Page title<br>400 · +0.06em · UC</div>
+        <div class="type-sample"><span class="t-title">About.</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Navigation<br>400 · +0.16em · UC</div>
+        <div class="type-sample"><span class="t-nav">Expertise</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body copy<br>300 · 1.72 leading</div>
+        <div class="type-sample">
+          <span class="t-body">At STOUD, we set the new standard for intellectual property law in Norway. We combine agility with professionalism, delivering legal services with a precision rarely found in the market.</span>
+        </div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Footer / meta<br>400 · +0.1em</div>
+        <div class="type-sample"><span class="t-small">Bryggen 3 · 5003 Bergen · Norway</span></div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Label / tag<br>400 · +0.22em · UC</div>
+        <div class="type-sample"><span class="t-label">Internal reference</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── 04 SPACING ── -->
+  <section class="section" id="spacing">
+    <p class="section-num">04</p>
+    <h2 class="section-title">Spacing</h2>
+    <p style="font-size:13px;color:var(--grey-1);margin-bottom:32px;line-height:1.7">
+      All spacing is fluid using <code style="font-size:12px;background:rgba(11,11,12,.05);padding:2px 7px;border-radius:4px;color:var(--ink)">clamp(min, preferred, max)</code>. No fixed breakpoints for layout — values scale continuously between min and max.
+    </p>
+    <div class="spacing-rows">
+      <div class="spacing-row">
+        <div class="spacing-label">Page padding-x</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:90%"></div></div>
+        <div class="spacing-val">clamp(24px, 5vw, 90px)</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">Section gap</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:80%"></div></div>
+        <div class="spacing-val">clamp(70px, 10vh, 110px)</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">Content max-width</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:69%"></div></div>
+        <div class="spacing-val">690px</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">Page top padding</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:65%"></div></div>
+        <div class="spacing-val">clamp(60px, 8vh, 96px)</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">Column gap</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:55%"></div></div>
+        <div class="spacing-val">clamp(40px, 6vw, 120px)</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">Mobile breakpoint</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:42%"></div></div>
+        <div class="spacing-val">860px — layout stacks</div>
+      </div>
+      <div class="spacing-row">
+        <div class="spacing-label">Mobile bar height</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:15%"></div></div>
+        <div class="spacing-val">56px fixed</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── 05 MOTION ── -->
+  <section class="section" id="motion">
+    <p class="section-num">05</p>
+    <h2 class="section-title">Motion</h2>
+
+    <div class="ease-demo">
+      <div class="ease-box" title="Hover to feel the easing"></div>
+      <div class="ease-info">
+        <p style="font-size:13px;color:var(--grey-1);line-height:1.7">
+          One easing curve for all transitions. Fast start, gentle deceleration — like a confident decision. Hover the circle to feel it.
+        </p>
+        <code>--ease: cubic-bezier(.22, .61, .36, 1)</code>
+      </div>
+    </div>
+
+    <div class="timing-rows">
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Hover / colour transitions</div>
+        <div class="timing-val">0.25 – 0.35s</div>
+      </div>
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Element entrance (rise)</div>
+        <div class="timing-val">0.65 – 0.85s</div>
+      </div>
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Stagger delay between items</div>
+        <div class="timing-val">0.07 – 0.10s per item</div>
+      </div>
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Page transitions (circle reveal)</div>
+        <div class="timing-val">0.62s</div>
+      </div>
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Reduced-motion fallback (fade)</div>
+        <div class="timing-val">0.30s</div>
+      </div>
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Modal / menu open</div>
+        <div class="timing-val">0.55 – 0.62s</div>
+      </div>
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Modal / menu close</div>
+        <div class="timing-val">0.40 – 0.45s (faster than open)</div>
+      </div>
+      <div class="timing-row">
+        <div class="timing-dot"></div>
+        <div class="timing-label">Background ring breath</div>
+        <div class="timing-val">16s ease-in-out infinite</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── 06 THE CIRCLE ── -->
+  <section class="section" id="circle">
+    <p class="section-num">06</p>
+    <h2 class="section-title">The Circle</h2>
+    <p style="font-size:clamp(15px,1.2vw,17px);font-weight:300;line-height:1.72;max-width:58ch;color:var(--grey-1);margin-bottom:clamp(28px,4vh,44px)">
+      The circle is not decoration — it is the brand's structural DNA. It appears in seven distinct contexts, each carrying the same idea: precision, completeness, orbit. A mark that closes on itself.
+    </p>
+    <div class="circles-grid">
+      <div class="circle-card">
+        <div class="circle-card-demo c-bg" style="border-radius:50%;width:80px;height:80px"></div>
+        <h4>Background Rings</h4>
+        <p>Two concentric rings breathe slowly behind all content. They ground the page without distracting from it.</p>
+        <div class="circle-card-where">Every page · fixed · z-index 0</div>
+      </div>
+      <div class="circle-card">
+        <svg width="52" height="52" viewBox="0 0 52 52" style="margin-bottom:16px">
+          <circle cx="26" cy="26" r="18" fill="none" stroke="rgba(11,11,12,.18)" stroke-width="1"/>
+          <circle cx="26" cy="8" r="3" fill="#0b0b0c"/>
+        </svg>
+        <h4>The Seal</h4>
+        <p>The «.» after STOUD is a live seal — an orbiting moon and rotating text ring that activate on the home page.</p>
+        <div class="circle-card-where">Home · SVG animation · on load</div>
+      </div>
+      <div class="circle-card">
+        <div style="width:9px;height:9px;border-radius:50%;background:var(--ink);margin-bottom:16px;margin-left:2px"></div>
+        <h4>Nav Dot</h4>
+        <p>An 8–9px filled circle scales in from zero on the active page and on hover. The brand mark at micro scale.</p>
+        <div class="circle-card-where">All pages · nav · active / hover state</div>
+      </div>
+      <div class="circle-card">
+        <div style="width:9px;height:9px;border-radius:50%;background:var(--ink);margin-bottom:16px;margin-left:2px"></div>
+        <h4>Cursor</h4>
+        <p>The system cursor is replaced by the same 8px dot. Scales to 14px on interactive elements. Hidden on touch devices.</p>
+        <div class="circle-card-where">All pages · pointer · desktop only</div>
+      </div>
+      <div class="circle-card">
+        <div style="margin-bottom:16px;display:flex;gap:6px;align-items:center">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(11,11,12,.08)"></div>
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-2)">→</span>
+          <div style="width:52px;height:52px;border-radius:50%;background:rgba(11,11,12,.12)"></div>
+        </div>
+        <h4>Page Transitions</h4>
+        <p>Navigation between pages reveals the new page via an expanding circle rooted at the STOUD logo. Cross-document View Transitions API.</p>
+        <div class="circle-card-where">All pages · clip-path:circle() · 0.62s</div>
+      </div>
+      <div class="circle-card">
+        <div style="width:80px;height:80px;border-radius:50%;background:rgba(11,11,12,.08);margin-bottom:16px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden">
+          <div style="width:110%;height:60%;border-radius:50% 50% 0 0;background:rgba(11,11,12,.12)"></div>
+        </div>
+        <h4>Mobile Menu</h4>
+        <p>A large circle fills the menu's upper area — links live inside it. Opens from the MENU button position.</p>
+        <div class="circle-card-where">Subpages · mobile · ::before pseudo-element</div>
+      </div>
+      <div class="circle-card">
+        <div style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(11,11,12,.16);display:grid;place-items:center;font-size:16px;margin-bottom:16px;color:var(--ink)">×</div>
+        <h4>Close Button</h4>
+        <p>The modal and menu close button is a circle with ×. Fills solid black on hover — a deliberate gesture.</p>
+        <div class="circle-card-where">People modal · mobile menu · hover state</div>
+      </div>
+      <div class="circle-card">
+        <div style="width:80px;height:80px;border-radius:50%;background:rgba(11,11,12,.08);margin-bottom:16px;display:flex;align-items:center;justify-content:center">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(11,11,12,.14)"></div>
+        </div>
+        <h4>People Modal</h4>
+        <p>Clicking a portrait opens the detail view via a circle expanding from the clicked photo's centre.</p>
+        <div class="circle-card-where">People page · clip-path:circle() · 0.60s</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── 07 LAYOUT ── -->
+  <section class="section" id="layout">
+    <p class="section-num">07</p>
+    <h2 class="section-title">Layout Grid</h2>
+    <p style="font-size:13px;color:var(--grey-1);margin-bottom:24px;line-height:1.7">
+      All subpages use a two-column flex layout: <strong style="color:var(--ink)">content</strong> (max 690px, flex-grow) + <strong style="color:var(--ink)">nav-col</strong> (fixed ~190px min-width). Below 860px, the nav-col is hidden and replaced by the mobile bar.
+    </p>
+    <div class="grid-demo">
+      <div class="grid-demo-inner">
+        <div class="grid-col">Content · max-width: 690px · flex: 1 1 auto</div>
+        <div class="grid-col-nav">Nav col · min-width: 190px</div>
+      </div>
+      <div class="grid-note">gap: clamp(40px, 6vw, 120px) · max-width: 1560px · margin: 0 auto</div>
+    </div>
+    <p style="font-size:13px;color:var(--grey-1);margin-top:24px;line-height:1.7">
+      The home page uses a different layout: a centred <code style="font-size:12px;background:rgba(11,11,12,.05);padding:2px 7px;border-radius:4px">.stage</code> with a <code style="font-size:12px;background:rgba(11,11,12,.05);padding:2px 7px;border-radius:4px">.composition</code> flex container — wordmark left, panel (menu) right, with parallax tilt on mouse move.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── 08 VOICE ── -->
+  <section class="section" id="voice">
+    <p class="section-num">08</p>
+    <h2 class="section-title">Voice & Tone</h2>
+    <p style="font-size:13px;color:var(--grey-1);margin-bottom:28px;line-height:1.7">
+      STOUD writes with authority, not volume. Short sentences. No buzzwords. Present tense. The period at the end of STOUD. is not punctuation — it is a statement.
+    </p>
+    <div class="voice-pairs">
+      <div class="voice-pair">
+        <div class="voice-no">
+          <span class="voice-tag">Avoid</span>
+          We are a leading, innovative, full-service law firm offering best-in-class solutions.
+        </div>
+        <div class="voice-yes">
+          <span class="voice-tag">Use</span>
+          STOUD sets the new standard for intellectual property law in Norway.
+        </div>
+      </div>
+      <div class="voice-pair">
+        <div class="voice-no">
+          <span class="voice-tag">Avoid</span>
+          Our team of experienced professionals are here to help you navigate complex legal landscapes.
+        </div>
+        <div class="voice-yes">
+          <span class="voice-tag">Use</span>
+          We quietly lead, giving our clients the assurance that they are always one step ahead.
+        </div>
+      </div>
+      <div class="voice-pair">
+        <div class="voice-no">
+          <span class="voice-tag">Avoid</span>
+          Click here to get in touch with us today!
+        </div>
+        <div class="voice-yes">
+          <span class="voice-tag">Use</span>
+          You are welcome to get in touch in confidence at info@stoud.com
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;padding:24px 28px;border:1px solid var(--hair);border-radius:12px">
+      <p style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-2);margin-bottom:12px">Headline style</p>
+      <p style="font-size:14px;color:var(--body);line-height:1.7;font-weight:300">
+        Page titles use <strong style="color:var(--ink)">one word + period</strong> when possible: <em>About.</em> · <em>People.</em> · <em>Expertise.</em> — or a short phrase: <em>Work at STOUD.</em><br>
+        The period is part of the identity. It closes the thought. It signals precision.
+      </p>
+    </div>
+  </section>
+
+  <footer class="foot-manual">
+    <div class="foot-manual-brand">STOUD.</div>
+    <div class="foot-manual-note">Design Manual · Internal</div>
+  </footer>
+
+</div>
+</body>
+</html>
