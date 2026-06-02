@@ -219,7 +219,7 @@
 
   /* ---------- mobile nav ---------- */
   .mob-bar{display:none}
-  .mob-nav{position:fixed;inset:0;z-index:45;background:var(--paper);display:none}
+  .mob-nav{position:fixed;inset:0;z-index:45;background:var(--paper);display:none;overflow:hidden}
   .mob-nav.open{display:flex;flex-direction:column;
     clip-path:circle(0% at var(--mob-x,calc(100% - 44px)) var(--mob-y,28px));
     animation:mob-open .58s var(--ease) forwards}
@@ -262,12 +262,19 @@
   .mob-links a[aria-current="page"] .mdot{transform:scale(1)}
   .mob-foot{border-top:1px solid var(--hair);padding-top:20px;
     display:flex;flex-direction:column;gap:5px;
-    font-size:13px;color:var(--grey-1);letter-spacing:.03em;opacity:0}
+    font-size:13px;color:var(--grey-1);letter-spacing:.03em;opacity:0;
+    padding-bottom:clamp(28px,5vw,44px)}
   .mob-nav.open .mob-foot{animation:mob-li .5s var(--ease) .46s forwards}
   .mob-foot address{font-style:normal}
   .mob-foot a{color:var(--grey-1);text-decoration:none;transition:color .3s}
   .mob-foot a:hover{color:var(--ink)}
   .mob-legal{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+  /* brand circle — fills the main menu area, nav lives inside it */
+  .mob-nav::before{content:'';position:absolute;top:-20vw;left:50%;
+    transform:translateX(-50%);width:160vw;height:160vw;border-radius:50%;
+    background:var(--ink);opacity:.08;pointer-events:none;z-index:0}
+  .mob-inner{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden}
+  .mob-links{flex:0 0 auto;justify-content:flex-start;padding:clamp(60px,14vw,100px) 0 clamp(32px,8vw,56px)}
   @media(max-width:860px){
     .mob-bar{display:flex;align-items:center;justify-content:space-between;
       position:fixed;top:0;left:0;right:0;z-index:40;height:56px;
