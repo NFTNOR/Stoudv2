@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nftnor.github.io/Stoudv2/sitemap.xml

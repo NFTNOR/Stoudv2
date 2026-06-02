@@ -1,0 +1,37 @@
+# STOUD
+
+> STOUD is a Norwegian intellectual property and trademark law firm headquartered at Bryggen, Bergen. Founded by three licensed attorneys, the firm delivers precise, agile legal services to domestic and international clients across IP, corporate law, and dispute resolution.
+
+## About
+
+STOUD sets a new standard for intellectual property law in Norway. The firm combines agility with professionalism, offering a service that blends tradition with forward-thinking innovation. For international clients with interests in Norway and the EU, STOUD is the trusted partner of choice.
+
+## Services
+
+- Trademark prosecution and portfolio management
+- Patents, designs and trade secrets
+- Marketing and competition law
+- Corporate law and M&A
+- Dispute resolution and litigation
+
+## People
+
+- **Lars Henrik Stoud Platou** — Attorney-at-Law / Partner. Specialises in trademarks, licensing, commercial contracts and disputes. Recognised multiple times by Managing IP as an IP Star.
+- **Espen Riseng** — Attorney-at-Law / CEO & Partner. Full spectrum of IP law including patents, trademarks, copyright and technology law. Recognised by Managing IP as a Rising Star.
+- **Ivar Hillestad** — Attorney-at-Law / Partner. Over two decades in corporate law, M&A, strategic transactions, and comprehensive due diligence.
+
+## Contact
+
+- Address: Bryggen 3, 5003 Bergen, Norway
+- Email: info@stoud.com
+- Phone: +47 55 91 5000
+- Company registration: 935 801 966
+
+## Pages
+
+- [Home](https://nftnor.github.io/Stoudv2/stoud-home-v6.html)
+- [About](https://nftnor.github.io/Stoudv2/stoud-about.html)
+- [People](https://nftnor.github.io/Stoudv2/stoud-people.html)
+- [Expertise](https://nftnor.github.io/Stoudv2/stoud-expertise.html)
+- [Career](https://nftnor.github.io/Stoudv2/stoud-career.html)
+- [Contact](https://nftnor.github.io/Stoudv2/stoud-contact.html)
