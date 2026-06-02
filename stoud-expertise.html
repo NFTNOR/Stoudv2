@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Expertise — STOUD | Trademark &amp; IP Law</title>
+<meta name="description" content="STOUD's full-spectrum IP and corporate practice: trademarks, patents, designs, trade secrets, marketing and competition law, M&amp;A, and dispute resolution." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0c;--paper:#f1f1ef;--body:#26262a;
+    --grey-1:#5c5c5e;   /* ~5.9:1 on paper (AA) */
+    --grey-2:#6b6b6d;   /* ~4.7:1 on paper (AA) */
+    --hair:rgba(11,11,12,.16);--hair-soft:rgba(11,11,12,.06);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lato',-apple-system,sans-serif;background:var(--paper);color:var(--body);
+    -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;cursor:none}
+  @media (hover:none){body{cursor:auto}}
+  a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:2px}
+
+  /* faint breathing ring for continuity (kept subtle behind text) */
+  .bg-rings{position:fixed;inset:0;z-index:0;pointer-events:none;display:grid;place-items:center;opacity:.7}
+  .ring{position:absolute;border:1px solid var(--hair-soft);border-radius:50%;
+    width:min(150vh,150vw);aspect-ratio:1;animation:breathe 16s ease-in-out infinite}
+  @keyframes breathe{0%,100%{scale:1;opacity:.8}50%{scale:1.05;opacity:.45}}
+
+  main{flex:1 0 auto;position:relative;z-index:2}
+  .page{display:flex;justify-content:space-between;gap:clamp(40px,6vw,120px);
+    max-width:1560px;margin:0 auto;padding:clamp(60px,8vh,96px) clamp(24px,5vw,90px) 60px}
+
+  /* ---------- content ---------- */
+  .content{flex:1 1 auto;max-width:690px}
+  .title{font-weight:900;letter-spacing:-.02em;line-height:.9;
+    font-size:clamp(40px,5.4vw,66px);color:var(--ink);margin-bottom:clamp(28px,4vh,46px);
+    opacity:0;transform:translateY(20px);animation:rise .8s var(--ease) .1s forwards}
+
+  .content h2{font-weight:700;font-size:clamp(15px,1.15vw,17px);color:var(--ink);
+    letter-spacing:.005em;margin:clamp(30px,4.5vh,44px) 0 .8em;
+    opacity:0;transform:translateY(14px);animation:rise .7s var(--ease) forwards}
+  .content h2:first-of-type{margin-top:0}
+  .content p{font-weight:300;font-size:clamp(16px,1.25vw,18px);line-height:1.72;margin-bottom:1.4em;
+    max-width:62ch;opacity:0;transform:translateY(16px);animation:rise .75s var(--ease) forwards}
+  .content h2:nth-of-type(1){animation-delay:.20s}.content h2:nth-of-type(2){animation-delay:.30s}
+  .content h2:nth-of-type(3){animation-delay:.40s}.content h2:nth-of-type(4){animation-delay:.50s}
+  .content h2:nth-of-type(5){animation-delay:.60s}
+  .content p:nth-of-type(1){animation-delay:.24s}.content p:nth-of-type(2){animation-delay:.34s}
+  .content p:nth-of-type(3){animation-delay:.44s}.content p:nth-of-type(4){animation-delay:.54s}
+  .content p:nth-of-type(5){animation-delay:.64s}
+  .content a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--grey-2);transition:border-color .3s}
+  .content a:hover{border-color:var(--ink)}
+
+  /* ---------- nav column (logo over menu) ---------- */
+  .nav-col{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;
+    min-width:190px}
+  .brand{display:block;width:150px;margin-bottom:clamp(34px,5vh,52px);
+    opacity:0;transform:translateY(16px);animation:rise .8s var(--ease) .14s forwards}
+  .brand svg{width:100%;height:auto;display:block}
+  .menu{list-style:none;display:flex;flex-direction:column;gap:2px}
+  .menu li{opacity:0;transform:translateY(12px);animation:rise .65s var(--ease) forwards}
+  .menu li:nth-child(1){animation-delay:.3s}.menu li:nth-child(2){animation-delay:.37s}
+  .menu li:nth-child(3){animation-delay:.44s}.menu li:nth-child(4){animation-delay:.51s}
+  .menu li:nth-child(5){animation-delay:.58s}.menu li:nth-child(6){animation-delay:.65s}
+  .menu a{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--grey-1);
+    font-size:clamp(14px,1.05vw,16px);letter-spacing:.16em;text-transform:uppercase;
+    padding:11px 0;transition:color .35s var(--ease),transform .35s var(--ease)}
+  .menu .dot{width:8px;height:8px;border-radius:50%;background:var(--ink);flex:0 0 auto;
+    transform:scale(0);transition:transform .35s var(--ease)}
+  .menu a:hover,.menu a:focus-visible,.menu a[aria-current="page"]{color:var(--ink);transform:translateX(6px)}
+  .menu a:hover .dot,.menu a:focus-visible .dot,.menu a[aria-current="page"] .dot{transform:scale(1)}
+
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ---------- footer bar (same on every page) ---------- */
+  .foot{flex-shrink:0;position:relative;z-index:2;border-top:1px solid var(--hair);
+    padding:22px clamp(24px,5vw,90px);display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;gap:16px}
+  .foot-addr{justify-self:start;font-style:normal;color:var(--grey-1);font-size:12px;letter-spacing:.1em}
+  .foot-clock{color:var(--grey-2);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    display:flex;align-items:center;gap:7px;margin-top:5px}
+  .foot-clock .live{width:5px;height:5px;border-radius:50%;background:var(--ink);animation:blink 2.6s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+  .foot-mail{justify-self:center}
+  .foot-mail a{color:var(--ink);text-decoration:none;font-size:13px;letter-spacing:.05em;
+    border-bottom:1px solid var(--grey-2);padding-bottom:2px;transition:border-color .3s}
+  .foot-mail a:hover{border-color:var(--ink)}
+  .foot-legal{justify-self:end;display:flex;gap:22px}
+  .foot-legal a{color:var(--grey-2);text-decoration:none;font-size:12px;letter-spacing:.08em;transition:color .3s}
+  .foot-legal a:hover{color:var(--ink)}
+
+  /* ---------- mobile ---------- */
+  @media(max-width:860px){
+    body{cursor:auto}
+    .page{flex-direction:column;gap:32px;padding-top:calc(56px + 40px)}
+    .nav-col{display:none!important}
+    .foot{grid-template-columns:1fr;justify-items:center;text-align:center;gap:14px;padding:26px 24px 34px}
+    .foot-addr,.foot-mail,.foot-legal{justify-self:center}
+    .foot-clock{justify-content:center}
+  }
+
+  /* ---------- visible cursor ---------- */
+  .lens{position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;background:var(--ink);
+    pointer-events:none;z-index:50;transform:translate(-50%,-50%);
+    transition:width .2s var(--ease),height .2s var(--ease)}
+  .lens.dot{width:14px;height:14px}
+  @media (hover:none){.lens{display:none}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .title,.content h2,.content p,.brand,.menu li{opacity:1;transform:none}
+    .ring{scale:1!important}
+  }
+
+  /* ---------- cross-document page transition ---------- */
+  @view-transition{ navigation:auto }
+  ::view-transition-group(root){ animation-duration:.62s; animation-timing-function:var(--ease) }
+  ::view-transition-old(root){ animation:none; z-index:1 }
+  ::view-transition-new(root){ z-index:2; animation:vt-reveal .62s var(--ease) forwards }
+  @keyframes vt-reveal{
+    from{ clip-path:circle(0 at var(--vt-x,100%) var(--vt-y,0%)) }
+    to{ clip-path:circle(var(--vt-r,150%) at var(--vt-x,100%) var(--vt-y,0%)) }
+  }
+  @keyframes vt-fade-out{ to{ opacity:0 } }
+  @keyframes vt-fade-in{ from{ opacity:0 } }
+  /* reduced motion: skip the expanding circle, keep a soft cross-fade */
+  @media (prefers-reduced-motion:reduce){
+    ::view-transition-group(root){ animation-duration:.3s }
+    ::view-transition-old(root){ animation:vt-fade-out .3s ease both }
+    ::view-transition-new(root){ clip-path:none; animation:vt-fade-in .3s ease both }
+  }
+
+  /* ---------- mobile nav ---------- */
+  .mob-bar{display:none}
+  .mob-nav{position:fixed;inset:0;z-index:45;background:var(--paper);display:none}
+  .mob-nav.open{display:flex;flex-direction:column;clip-path:circle(0% at var(--mob-x,calc(100% - 44px)) var(--mob-y,28px));animation:mob-open .58s var(--ease) forwards}
+  .mob-nav.closing{display:flex;animation:mob-close .42s var(--ease) forwards}
+  @keyframes mob-open{from{clip-path:circle(0% at var(--mob-x) var(--mob-y))}to{clip-path:circle(150% at var(--mob-x) var(--mob-y))}}
+  @keyframes mob-close{from{clip-path:circle(150% at var(--mob-x) var(--mob-y))}to{clip-path:circle(0% at var(--mob-x) var(--mob-y))}}
+  .mob-inner{display:flex;flex-direction:column;height:100%;padding:0 clamp(24px,6vw,48px) 40px;overflow-y:auto}
+  .mob-top{display:flex;align-items:center;justify-content:space-between;height:56px;flex-shrink:0}
+  .mob-top-brand{font-weight:900;font-size:18px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+  .mob-x{width:40px;height:40px;border-radius:50%;border:1px solid var(--hair);background:none;display:grid;place-items:center;font-size:18px;color:var(--ink);cursor:pointer;transition:border-color .3s,background .3s,transform .35s var(--ease)}
+  .mob-x:hover{border-color:var(--ink);background:var(--ink);color:var(--paper);transform:rotate(90deg)}
+  .mob-links{list-style:none;flex:1;display:flex;flex-direction:column;justify-content:center;padding:16px 0}
+  .mob-links li{opacity:0;transform:translateX(-12px)}
+  .mob-nav.open .mob-links li{animation:mob-li .5s var(--ease) forwards}
+  .mob-nav.open .mob-links li:nth-child(1){animation-delay:.13s}.mob-nav.open .mob-links li:nth-child(2){animation-delay:.19s}.mob-nav.open .mob-links li:nth-child(3){animation-delay:.25s}.mob-nav.open .mob-links li:nth-child(4){animation-delay:.31s}.mob-nav.open .mob-links li:nth-child(5){animation-delay:.37s}.mob-nav.open .mob-links li:nth-child(6){animation-delay:.43s}
+  @keyframes mob-li{to{opacity:1;transform:none}}
+  .mob-links a{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--grey-1);font-size:clamp(28px,8vw,42px);font-weight:900;letter-spacing:-.02em;padding:6px 0;transition:color .25s,transform .25s var(--ease)}
+  .mob-links a[aria-current="page"]{color:var(--ink)}
+  .mob-links .mdot{width:9px;height:9px;border-radius:50%;background:var(--ink);flex:0 0 auto;transform:scale(0);transition:transform .3s var(--ease)}
+  .mob-links a[aria-current="page"] .mdot{transform:scale(1)}
+  .mob-foot{border-top:1px solid var(--hair);padding-top:20px;display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--grey-1);opacity:0}
+  .mob-nav.open .mob-foot{animation:mob-li .5s var(--ease) .46s forwards}
+  .mob-foot address{font-style:normal}
+  .mob-foot a{color:var(--grey-1);text-decoration:none;transition:color .3s}
+  .mob-legal{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+  @media(max-width:860px){
+    .mob-bar{display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:40;height:56px;padding:0 clamp(20px,5vw,36px);background:var(--paper);border-bottom:1px solid var(--hair)}
+    .mob-bar-brand{font-weight:900;font-size:18px;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+    .mob-toggle{display:flex;align-items:center;gap:9px;background:none;border:none;cursor:pointer;font-family:inherit;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);padding:0}
+    .mob-circle{width:8px;height:8px;border-radius:50%;background:var(--ink)}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .mob-nav.open{clip-path:none!important;animation:none}
+    .mob-nav.closing{display:none;animation:none}
+    .mob-links li,.mob-foot{opacity:1;transform:none;animation:none!important}
+  }
+</style>
+</head>
+<body>
+  <div class="lens" id="lens"></div>
+  <div class="bg-rings"><div class="ring"></div></div>
+
+  <main>
+    <div class="page">
+      <article class="content">
+        <h1 class="title">Expertise.</h1>
+
+        <h2>Trademark Prosecution and Portfolio Management</h2>
+        <p>STOUD offers the full spectrum of trademark services, from clearance searches and planning global filing strategies, domestic/international prosecution and robust enforcement where needed. We ensure that trademark portfolios are managed seamlessly and efficiently, while providing a strategic advantage.</p>
+
+        <h2>Patents, Designs and Trade Secrets</h2>
+        <p>While trademarks remain central, our practice extends across the full spectrum of intellectual property law. We advise on design protection, patent strategy and licensing, as well as the safeguarding of trade secrets and know-how. Whether through registration, contractual structuring, or enforcement, we ensure that intangible assets are protected and leveraged as core business drivers. This breadth allows us to deliver integrated IP solutions that align with broader corporate and commercial goals.</p>
+
+        <h2>Marketing and Competition Law</h2>
+        <p>We provide expert guidance in navigating complex marketing and competition law landscapes. Our services cover compliance with advertising regulations, strategic enforcement of competitive positioning, and action against counterfeits and other forms of unfair competition. We deliver tailored solutions that protect and enhance market presence efficiently.</p>
+
+        <h2>Corporate Law and M&amp;A</h2>
+        <p>Our expertise covers mergers and acquisitions, commercial contract and corporate law, as well as comprehensive due diligence procedures. We conduct both traditional and IP-centric due diligence, ensuring transactions are executed with precision and strategic foresight. By combining corporate legal capability with technical and specialised competence in IP prosecution and portfolio management, we offer an edge that is uncommon in the marketplace. This allows STOUD to deliver corporate legal services in combination with IP at the level expected from leading full service firms, while retaining the specialised focus of a technical IP consultancy practice.</p>
+
+        <h2>Dispute Resolution and Litigation</h2>
+        <p>Our team is exclusively composed of licensed attorneys admitted to the Norwegian Bar, with full rights of audience before Norwegian courts, arbitration panels, and other dispute resolution forums. We have extensive experience handling conflicts both domestically and internationally, including complex matters arising from infringement, breach, or commercial disputes in a wide variety of sectors. Cases are managed efficiently and decisively, with a consistent focus on safeguarding the interests of direct clients.</p>
+      </article>
+
+      <div class="nav-col">
+        <a class="brand" href="stoud-home-v6.html" aria-label="STOUD — home">
+          <svg viewBox="0 0 451 85" xmlns="http://www.w3.org/2000/svg">
+            <path d="M51.5314 26.7648C51.5314 24.2918 51.0201 22.1565 49.9975 20.3588C48.9749 18.5702 47.6236 17.0919 45.9619 15.9421C44.291 14.7923 42.3919 13.9345 40.2555 13.3778C38.119 12.8212 35.9003 12.5474 33.5903 12.5474C31.7095 12.5474 29.7921 12.6752 27.82 12.9307C25.8479 13.1862 24.104 13.6607 22.561 14.3451C21.0179 15.0295 19.758 15.9877 18.781 17.2288C17.7949 18.4698 17.311 20.0668 17.311 22.0287C17.311 23.9907 17.8406 25.834 18.9088 27.285C19.9771 28.7359 21.3466 29.9313 23.0083 30.8713C24.6701 31.8112 26.5326 32.5777 28.5869 33.18C30.6413 33.7823 32.6499 34.2933 34.6129 34.7222C38.0277 35.4066 41.6159 36.2553 45.3776 37.2864C49.1392 38.3085 52.6179 39.7594 55.8226 41.6393C59.0273 43.5191 61.6751 45.9738 63.766 49.0035C65.8568 52.0331 66.9068 55.9388 66.9068 60.7296C66.9068 65.0825 65.9664 68.7326 64.0855 71.6801C62.2047 74.6277 59.7304 77.0185 56.6535 78.8527C53.5766 80.6869 50.0705 82.0192 46.1445 82.8223C42.2093 83.6344 38.1555 84.036 33.9647 84.036C29.7739 84.036 25.8479 83.5432 21.9127 82.5668C17.9775 81.5904 14.4533 80.0664 11.3398 78.0132C8.21726 75.9691 5.63339 73.3592 3.58821 70.2018C1.53389 67.0444 0.337821 63.3304 0 59.0597L14.4806 57.1342C14.7363 59.443 15.4393 61.4871 16.5989 63.2848C17.7493 65.0733 19.2284 66.6155 21.0179 67.8931C22.8166 69.1798 24.8435 70.138 27.1078 70.7767C29.3722 71.4155 31.746 71.7349 34.2203 71.7349C36.439 71.7349 38.5937 71.6071 40.6937 71.3516C42.7846 71.0961 44.6654 70.6033 46.3362 69.8824C48.0071 69.1615 49.3492 68.176 50.3718 66.9349C51.3944 65.6939 51.9057 64.0969 51.9057 62.1258C51.9057 59.4795 51.0475 57.3076 49.3401 55.592C47.6327 53.8856 45.5145 52.4711 42.9945 51.367C40.4746 50.2537 37.8268 49.405 35.0512 48.8027C32.2756 48.2096 29.8195 47.6529 27.683 47.1328C24.6061 46.4484 21.5749 45.5814 18.5801 44.5046C15.5854 43.437 12.8737 41.986 10.4359 40.1518C7.99814 38.3176 6.03512 36.0363 4.53776 33.2986C3.04039 30.5701 2.2917 27.2393 2.2917 23.3063C2.2917 18.9535 3.25038 15.3033 5.17688 12.3558C7.10337 9.40828 9.57768 7.03567 12.6089 5.24708C15.6402 3.4585 19.0001 2.17182 22.6705 1.40528C26.3409 0.638747 29.9291 0.255479 33.4351 0.255479C37.6168 0.255479 41.6615 0.748252 45.551 1.72467C49.4405 2.70109 52.8553 4.22504 55.8043 6.26913C58.7534 8.32235 61.1273 10.9413 62.9169 14.1444C64.7155 17.3474 65.6103 21.1253 65.6103 25.4781L51.5131 26.7648H51.5314Z" fill="black"/>
+            <path d="M104.286 82.4937V13.6972H77.1143V1.40526H145.948V13.7063H118.648V82.5029H104.295L104.286 82.4937Z" fill="black"/>
+            <path d="M152.686 41.8857C152.686 35.7351 153.836 30.0774 156.146 24.9124C158.456 19.7474 161.57 15.3307 165.505 11.6532C169.44 7.98474 174.051 5.11936 179.346 3.07527C184.642 1.02205 190.285 0 196.265 0C202.245 0 207.87 1.03117 213.119 3.07527C218.378 5.11936 222.971 7.98474 226.897 11.6532C230.832 15.3307 233.927 19.72 236.192 24.8485C238.456 29.977 239.588 35.653 239.588 41.8857C239.588 48.1183 238.456 53.8035 236.192 58.9228C233.927 64.0513 230.832 68.4498 226.897 72.1182C222.962 75.7957 218.378 78.652 213.119 80.6961C207.86 82.7493 202.245 83.7714 196.265 83.7714C190.285 83.7714 184.642 82.7493 179.346 80.6961C174.051 78.652 169.431 75.7866 165.505 72.1182C161.57 68.4498 158.456 64.0513 156.146 58.9228C153.836 53.7944 152.686 48.1183 152.686 41.8857ZM196.265 70.7038C200.364 70.7038 204.172 69.9828 207.669 68.5319C211.175 67.081 214.224 65.0551 216.835 62.4453C219.438 59.8445 221.465 56.7875 222.925 53.2833C224.377 49.7792 225.108 45.983 225.108 41.8766C225.108 37.7701 224.377 33.9831 222.925 30.4789C221.474 26.9747 219.447 23.9269 216.835 21.317C214.224 18.7162 211.175 16.6813 207.669 15.2303C204.163 13.7794 200.364 13.0494 196.265 13.0494C192.165 13.0494 188.34 13.7794 184.797 15.2303C181.255 16.6813 178.178 18.6889 175.567 21.2531C172.955 23.8173 170.91 26.8652 169.413 30.415C167.915 33.9557 167.167 37.7792 167.167 41.8766C167.167 45.9739 167.915 49.7974 169.413 53.3381C170.91 56.8879 172.955 59.9358 175.567 62.5C178.169 65.0642 181.246 67.0718 184.797 68.5228C188.34 69.9737 192.165 70.6946 196.265 70.6946V70.7038Z" fill="black"/>
+            <path d="M269.864 1.27764V46.2386C269.864 49.7427 270.229 52.9914 270.951 55.9754C271.672 58.9685 272.85 61.5693 274.475 63.7868C276.1 66.0042 278.255 67.7563 280.948 69.043C283.642 70.3206 286.947 70.9685 290.882 70.9685C294.817 70.9685 298.232 70.3297 300.88 69.043C303.528 67.7563 305.692 66.0134 307.353 63.7868C309.024 61.5693 310.193 58.9594 310.878 55.9754C311.562 52.9823 311.9 49.7427 311.9 46.2386V1.27764H325.997V46.631C325.997 52.015 325.313 56.9883 323.943 61.551C322.573 66.1229 320.437 70.0468 317.534 73.3411C314.63 76.6262 310.978 79.1905 306.577 81.0247C302.176 82.8589 296.899 83.7806 290.745 83.7806C284.591 83.7806 279.424 82.8589 274.977 81.0247C270.531 79.1905 266.879 76.608 264.021 73.2681C261.154 69.9373 259.017 66.0134 257.611 61.4872C256.205 56.961 255.493 52.0058 255.493 46.6219V1.27764H269.864Z" fill="black"/>
+            <path d="M346.285 1.27764H383.71C389.772 1.27764 395.333 2.15368 400.373 3.90576C405.412 5.65784 409.768 8.24033 413.447 11.6624C417.117 15.0753 419.984 19.3277 422.039 24.4106C424.093 29.4934 425.116 35.3246 425.116 41.8949C425.116 48.4652 424.093 54.3055 422.039 59.3883C419.984 64.4712 417.127 68.7145 413.447 72.1365C409.777 75.5586 405.412 78.1411 400.373 79.884C395.333 81.6361 389.772 82.5121 383.71 82.5121H346.285V1.27764ZM360.637 70.0651H383.198C387.042 70.0651 390.649 69.5358 394.027 68.4681C397.405 67.4004 400.309 65.7122 402.746 63.4126C405.184 61.1039 407.102 58.1838 408.517 54.634C409.923 51.0933 410.635 46.8409 410.635 41.8858C410.635 36.9307 409.932 32.6873 408.517 29.1375C407.102 25.5969 405.184 22.6676 402.746 20.3589C400.309 18.0502 397.405 16.3711 394.027 15.3034C390.649 14.2357 387.042 13.7065 383.198 13.7065H360.637V70.0742V70.0651Z" fill="black"/>
+            <path d="M433.972 74.1168C433.972 71.7533 434.775 69.8096 436.373 68.2765C437.971 66.7525 439.888 65.986 442.116 65.986C444.344 65.986 446.325 66.7525 447.859 68.2765C449.393 69.8096 450.151 71.7533 450.151 74.1168C450.151 76.4802 449.384 78.4422 447.859 80.0118C446.325 81.5814 444.417 82.357 442.116 82.357C439.815 82.357 437.971 81.5905 436.373 80.0665C434.775 78.5426 433.972 76.5532 433.972 74.1168Z" fill="black"/>
+          </svg>
+        </a>
+
+        <nav>
+          <ul class="menu">
+            <li><a href="stoud-home-v6.html"><span class="dot"></span>Home</a></li>
+            <li><a href="stoud-about.html"><span class="dot"></span>About</a></li>
+            <li><a href="stoud-people.html"><span class="dot"></span>People</a></li>
+            <li><a href="stoud-expertise.html" aria-current="page"><span class="dot"></span>Expertise</a></li>
+            <li><a href="stoud-career.html"><span class="dot"></span>Career</a></li>
+            <li><a href="stoud-contact.html"><span class="dot"></span>Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-addr-wrap">
+      <address class="foot-addr">Bryggen 3 · 5003 Bergen · Norway</address>
+      <div class="foot-clock"><span class="live"></span><span id="clock">Bergen</span></div>
+    </div>
+    <div class="foot-mail"><a href="mailto:info@stoud.com">info@stoud.com</a></div>
+    <div class="foot-legal">
+      <a href="/faq">FAQ</a><a href="/terms">Terms</a><a href="/privacy">Privacy policy</a>
+    </div>
+  </footer>
+
+<!-- mobile bar + nav -->
+<div class="mob-bar">
+  <a class="mob-bar-brand" href="stoud-home-v6.html">STOUD.</a>
+  <button class="mob-toggle" id="mob-toggle" aria-label="Open menu" aria-expanded="false">
+    <span class="mob-circle"></span>MENU
+  </button>
+</div>
+<div class="mob-nav" id="mob-nav" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="mob-inner">
+    <div class="mob-top">
+      <a class="mob-top-brand" href="stoud-home-v6.html">STOUD.</a>
+      <button class="mob-x" id="mob-close" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mob-links">
+      <li><a href="stoud-home-v6.html"><span class="mdot"></span>Home</a></li>
+      <li><a href="stoud-about.html"><span class="mdot"></span>About</a></li>
+      <li><a href="stoud-people.html"><span class="mdot"></span>People</a></li>
+      <li><a href="stoud-expertise.html" aria-current="page"><span class="mdot"></span>Expertise</a></li>
+      <li><a href="stoud-career.html"><span class="mdot"></span>Career</a></li>
+      <li><a href="stoud-contact.html"><span class="mdot"></span>Contact</a></li>
+    </ul>
+    <div class="mob-foot">
+      <address>Bryggen 3 &middot; 5003 Bergen &middot; Norway</address>
+      <a href="mailto:info@stoud.com">info@stoud.com</a>
+      <a href="tel:+4755915000">+ 47 55 91 5000</a>
+      <div class="mob-legal"><a href="/faq">FAQ</a><a href="/terms">Terms</a><a href="/privacy">Privacy policy</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const lens=document.getElementById('lens');
+  if(matchMedia('(hover:hover)').matches){
+    let lx=innerWidth/2,ly=innerHeight/2,cx=lx,cy=ly;
+    addEventListener('mousemove',e=>{lx=e.clientX;ly=e.clientY});
+    (function loop(){cx+=(lx-cx)*.3;cy+=(ly-cy)*.3;
+      lens.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(loop)})();
+    document.querySelectorAll('a').forEach(el=>{
+      el.addEventListener('mouseenter',()=>lens.classList.add('dot'));
+      el.addEventListener('mouseleave',()=>lens.classList.remove('dot'));
+    });
+  }else{lens.style.display='none';}
+  const clock=document.getElementById('clock');
+  function tick(){try{const t=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Oslo',hour:'2-digit',minute:'2-digit'}).format(new Date());clock.textContent='Bergen '+t;}catch{}}
+  tick();setInterval(tick,30000);
+
+
+  /* ---------- mobile nav ---------- */
+  (()=>{
+    const tog=document.getElementById('mob-toggle');
+    const nav=document.getElementById('mob-nav');
+    const cls=document.getElementById('mob-close');
+    if(!tog||!nav) return;
+    function openNav(){
+      const r=tog.getBoundingClientRect();
+      nav.style.setProperty('--mob-x',(r.left+r.width/2)+'px');
+      nav.style.setProperty('--mob-y',(r.top+r.height/2)+'px');
+      nav.classList.remove('closing');nav.classList.add('open');
+      tog.setAttribute('aria-expanded','true');
+      document.body.style.overflow='hidden';
+    }
+    function closeNav(){
+      nav.classList.remove('open');nav.classList.add('closing');
+      tog.setAttribute('aria-expanded','false');
+      nav.addEventListener('animationend',()=>{nav.classList.remove('closing');document.body.style.overflow='';},{once:true});
+    }
+    tog.addEventListener('click',openNav);
+    cls.addEventListener('click',closeNav);
+    addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open'))closeNav();});
+  })();
+
+  /* ---------- circle page transition — always grows from the brand mark (top-right) ---------- */
+  addEventListener('pagereveal',e=>{
+    if(!e.viewTransition) return;
+    const b=document.querySelector('.brand');
+    let x=innerWidth, y=0;                 // fallback: top-right corner
+    if(b){const r=b.getBoundingClientRect(); x=r.right; y=r.top+r.height/2;}
+    const rad=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+    const root=document.documentElement;
+    root.style.setProperty('--vt-x',x+'px');
+    root.style.setProperty('--vt-y',y+'px');
+    root.style.setProperty('--vt-r',rad+'px');
+  });
+</script>
+</body>
+</html>
