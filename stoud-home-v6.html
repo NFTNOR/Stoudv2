@@ -198,8 +198,11 @@
   .lang{display:flex;gap:12px;align-items:center;margin-top:26px;margin-left:24px;
     opacity:0;animation:rise .7s var(--ease) 1.1s forwards}
   .lang a{text-decoration:none;color:var(--grey-2);font-size:11px;letter-spacing:.18em;
-    text-transform:uppercase;transition:color .3s}
+    text-transform:uppercase;transition:color .3s;display:inline-flex;align-items:center;gap:5px}
   .lang a:hover{color:var(--ink)}
+  .lang a .flag{font-size:14px;opacity:0;transform:scale(.6);letter-spacing:0;
+    transition:opacity .25s var(--ease),transform .25s var(--ease);display:inline-block}
+  .lang a:hover .flag{opacity:1;transform:scale(1)}
   .lang span{color:var(--hair);font-size:10px}
 
   /* ---------- footer bar (same on every page) ---------- */
@@ -339,7 +342,7 @@
           </ul>
         </nav>
         <div class="lang">
-          <a href="/home-jpn">JP</a><span>·</span><a href="/home-chn">CN</a>
+          <a href="/home-jpn"><span class="flag">🇯🇵</span>JPN</a><span>·</span><a href="/home-chn"><span class="flag">🇨🇳</span>CHN</a>
         </div>
       </div>
     </div>
