@@ -380,6 +380,9 @@
     border-radius:0 0 8px 8px;text-decoration:none;font-size:12px;
     letter-spacing:.1em;text-transform:uppercase;transition:top .2s}
   .skip-link:focus{top:0}
+
+  ::selection{background:var(--ink);color:var(--paper)}
+  ::-moz-selection{background:var(--ink);color:var(--paper)}
 </style>
 </head>
 <body>
@@ -416,6 +419,19 @@
             <li><a href="stoud-contact.html"><span class="dot"></span>Contact</a></li>
           </ul>
         </nav>
+
+      <div class="lang-switch" style="margin-top:auto;padding-top:clamp(24px,4vh,40px);
+        display:flex;gap:10px;align-items:center">
+        <a href="?lang=ja" data-lang="ja" style="font-size:11px;letter-spacing:.16em;
+          text-transform:uppercase;text-decoration:none;color:var(--grey-2);
+          transition:color .3s" onmouseover="this.style.color='var(--ink)'"
+          onmouseout="this.style.color='var(--grey-2)'">JP</a>
+        <span style="color:var(--hair);font-size:10px">·</span>
+        <a href="?lang=zh" data-lang="zh" style="font-size:11px;letter-spacing:.16em;
+          text-transform:uppercase;text-decoration:none;color:var(--grey-2);
+          transition:color .3s" onmouseover="this.style.color='var(--ink)'"
+          onmouseout="this.style.color='var(--grey-2)'">ZH</a>
+      </div>
       </div>
     </div>
   </main>
@@ -522,7 +538,7 @@
 
   /* ---------- build the grid ---------- */
   const grid=document.getElementById('people');
-  grid.innerHTML=PEOPLE.map(p=>`
+  function buildGrid(){grid.innerHTML=PEOPLE.map(p=>`
     <div class="person" data-id="${p.id}">
       <div class="person-thumb" data-open="${p.id}">
         <img class="person-photo" src="${p.photo}" alt="${esc(p.name)}" loading="lazy">
@@ -541,6 +557,15 @@
   const modalInner=document.getElementById('modal-inner');
   let lastFocus=null;
 
+  window.__renderPeople = function(persons) {
+    PEOPLE = persons;
+    grid.innerHTML = '';
+    buildGrid();
+    grid.classList.add('ready');
+  }
+  buildGrid();
+  bindHoverDots(grid);
+  };
   function openModal(id, triggerEl){
     const p=PEOPLE.find(x=>x.id===id); if(!p) return;
     lastFocus=document.activeElement;
@@ -671,5 +696,6 @@
     root.style.setProperty('--vt-r',rad+'px');
   });
 </script>
+<script src="/content/i18n.js"></script>
 </body>
 </html>

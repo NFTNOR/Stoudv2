@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Content Editor — STOUD</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0c; --paper:#f1f1ef; --body:#26262a;
+    --grey-1:#5c5c5e; --grey-2:#6b6b6d;
+    --hair:rgba(11,11,12,.14); --hair-soft:rgba(11,11,12,.06);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --sidebar:260px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lato',-apple-system,sans-serif;background:#f8f8f6;color:var(--body);
+    -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+
+  /* ── header ── */
+  .header{background:var(--ink);color:var(--paper);height:52px;display:flex;align-items:center;
+    justify-content:space-between;padding:0 28px;flex-shrink:0}
+  .header-brand{font-weight:900;font-size:16px;letter-spacing:-.01em}
+  .header-right{display:flex;align-items:center;gap:16px}
+  .header-tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(241,241,239,.5)}
+  .save-status{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:rgba(241,241,239,.45);transition:color .3s}
+  .save-status.saved{color:#7ecf7e}
+
+  /* ── layout ── */
+  .app{display:flex;flex:1;overflow:hidden;height:calc(100vh - 52px)}
+
+  /* ── sidebar ── */
+  .sidebar{width:var(--sidebar);background:var(--paper);border-right:1px solid var(--hair);
+    display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+  .sidebar-section{padding:18px 0 8px}
+  .sidebar-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-2);
+    padding:0 18px;margin-bottom:6px}
+  .lang-btns{display:flex;flex-direction:column;gap:2px;padding:0 10px}
+  .lang-btn{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:7px;
+    background:none;border:none;cursor:pointer;font-family:inherit;font-size:14px;
+    font-weight:400;color:var(--grey-1);text-align:left;transition:background .2s,color .2s;
+    width:100%}
+  .lang-btn:hover{background:var(--hair-soft);color:var(--ink)}
+  .lang-btn.active{background:rgba(11,11,12,.07);color:var(--ink);font-weight:700}
+  .lang-flag{font-size:18px;line-height:1}
+  .lang-fill{font-size:10px;margin-left:auto;padding:2px 7px;border-radius:10px;
+    background:rgba(11,11,12,.08);color:var(--grey-2);letter-spacing:.04em}
+  .lang-fill.complete{background:rgba(60,160,60,.12);color:#2d7d2d}
+
+  .page-btns{display:flex;flex-direction:column;gap:2px;padding:0 10px}
+  .page-btn{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;
+    background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;
+    color:var(--grey-1);text-align:left;transition:background .2s,color .2s;width:100%;
+    letter-spacing:.04em}
+  .page-btn:hover{background:var(--hair-soft);color:var(--ink)}
+  .page-btn.active{background:rgba(11,11,12,.07);color:var(--ink);font-weight:700}
+  .page-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.4;flex-shrink:0}
+  .page-btn.active .page-dot{opacity:1}
+
+  /* ── main ── */
+  .main{flex:1;overflow-y:auto;padding:36px 40px 80px}
+  .main-header{margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--hair);
+    display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .main-title{font-weight:900;font-size:22px;color:var(--ink);letter-spacing:-.01em}
+  .main-subtitle{font-size:13px;color:var(--grey-2);margin-top:4px;letter-spacing:.02em}
+
+  /* ── actions ── */
+  .actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:8px;
+    font-family:inherit;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    cursor:pointer;border:none;transition:all .2s var(--ease)}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:#2a2a2e}
+  .btn-secondary{background:none;border:1px solid var(--hair);color:var(--grey-1)}
+  .btn-secondary:hover{border-color:var(--ink);color:var(--ink)}
+  .btn-danger{background:none;border:1px solid rgba(200,50,50,.3);color:#c03030}
+  .btn-danger:hover{background:rgba(200,50,50,.06)}
+
+  /* ── form fields ── */
+  .field-group{margin-bottom:28px}
+  .field-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-2);
+    margin-bottom:7px;display:flex;align-items:center;gap:8px}
+  .field-hint{font-size:11px;letter-spacing:0;text-transform:none;color:var(--grey-2);
+    font-weight:300;margin-left:4px}
+  .field input,.field textarea{width:100%;padding:10px 14px;border:1px solid var(--hair);
+    border-radius:8px;font-family:inherit;font-size:14px;color:var(--ink);
+    background:var(--paper);resize:vertical;line-height:1.6;
+    transition:border-color .2s,box-shadow .2s}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);
+    box-shadow:0 0 0 3px rgba(11,11,12,.06)}
+  .field input.empty,.field textarea.empty{border-color:rgba(200,150,0,.4);
+    background:rgba(255,248,220,.4)}
+  .field textarea{min-height:80px}
+  .field textarea.tall{min-height:120px}
+  .field textarea.bio{min-height:100px}
+
+  /* ── section cards ── */
+  .section-card{border:1px solid var(--hair);border-radius:12px;margin-bottom:24px;overflow:hidden}
+  .section-card-header{padding:14px 18px;background:rgba(11,11,12,.03);
+    border-bottom:1px solid var(--hair);display:flex;align-items:center;gap:10px}
+  .section-card-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--grey-2);font-weight:700}
+  .section-card-body{padding:18px}
+
+  /* ── person card ── */
+  .person-card{border:1px solid var(--hair);border-radius:12px;margin-bottom:20px;overflow:hidden}
+  .person-card-header{padding:14px 18px;background:rgba(11,11,12,.03);
+    border-bottom:1px solid var(--hair);display:flex;align-items:center;gap:12px}
+  .person-avatar{width:32px;height:32px;border-radius:50%;background:var(--ink);
+    object-fit:cover;flex-shrink:0}
+  .person-card-name{font-weight:700;font-size:14px;color:var(--ink)}
+  .person-card-body{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .person-card-body .full{grid-column:1/-1}
+
+  /* ── unsaved indicator ── */
+  .unsaved-dot{width:7px;height:7px;border-radius:50%;background:#e07020;
+    display:none;flex-shrink:0}
+  .unsaved-dot.show{display:inline-block}
+
+  /* ── toast ── */
+  .toast{position:fixed;bottom:28px;right:28px;background:var(--ink);color:var(--paper);
+    padding:12px 20px;border-radius:8px;font-size:13px;letter-spacing:.04em;
+    opacity:0;transform:translateY(8px);transition:all .3s var(--ease);pointer-events:none;
+    z-index:100}
+  .toast.show{opacity:1;transform:none}
+
+  /* ── progress bar ── */
+  .progress-bar{height:3px;background:rgba(11,11,12,.06);border-radius:2px;margin-top:10px}
+  .progress-fill{height:100%;border-radius:2px;background:var(--ink);transition:width .4s var(--ease)}
+
+  /* ── empty state ── */
+  .empty-state{text-align:center;padding:60px 20px;color:var(--grey-2)}
+  .empty-state p{font-size:14px;line-height:1.7}
+
+  @media(max-width:700px){
+    .sidebar{display:none}
+    .main{padding:24px 20px 60px}
+    .person-card-body{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-brand">STOUD.</div>
+  <div class="header-right">
+    <span class="header-tag">Content Editor</span>
+    <button onclick="logout()" style="background:none;border:1px solid rgba(241,241,239,.25);color:rgba(241,241,239,.65);padding:6px 14px;border-radius:6px;font-family:inherit;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(241,241,239,.7)'" onmouseout="this.style.borderColor='rgba(241,241,239,.25)'">Sign out</button><span class="save-status" id="save-status">All changes saved</span>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Language</div>
+      <div class="lang-btns">
+        <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">
+          <span class="lang-flag">🇬🇧</span> English
+          <span class="lang-fill complete" id="fill-en">—</span>
+        </button>
+        <button class="lang-btn" data-lang="ja" onclick="switchLang('ja')">
+          <span class="lang-flag">🇯🇵</span> 日本語
+          <span class="lang-fill" id="fill-ja">—</span>
+        </button>
+        <button class="lang-btn" data-lang="zh" onclick="switchLang('zh')">
+          <span class="lang-flag">🇨🇳</span> 中文
+          <span class="lang-fill" id="fill-zh">—</span>
+        </button>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Page</div>
+      <div class="page-btns">
+        <button class="page-btn active" data-page="about" onclick="switchPage('about')">
+          <span class="page-dot"></span>About
+        </button>
+        <button class="page-btn" data-page="expertise" onclick="switchPage('expertise')">
+          <span class="page-dot"></span>Expertise
+        </button>
+        <button class="page-btn" data-page="career" onclick="switchPage('career')">
+          <span class="page-dot"></span>Career
+        </button>
+        <button class="page-btn" data-page="contact" onclick="switchPage('contact')">
+          <span class="page-dot"></span>Contact
+        </button>
+        <button class="page-btn" data-page="people" onclick="switchPage('people')">
+          <span class="page-dot"></span>People
+        </button>
+        <button class="page-btn" data-page="nav" onclick="switchPage('nav')">
+          <span class="page-dot"></span>Navigation labels
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- main -->
+  <main class="main" id="main">
+    <div class="empty-state"><p>Loading content…</p></div>
+  </main>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── state ──
+let currentLang = 'en';
+let currentPage = 'about';
+let CONTENT = { en: null, ja: null, zh: null };
+const LANG_NAMES = { en: 'English', ja: '日本語', zh: '中文' };
+const LANG_FLAGS = { en: '🇬🇧', ja: '🇯🇵', zh: '🇨🇳' };
+
+// ── load JSON files ──
+async function loadAll() {
+  for (const lang of ['en','ja','zh']) {
+    try {
+      // Try server first
+      const r = await fetch(`/api/content/${lang}?_=${Date.now()}`);
+      if (r.ok) {
+        CONTENT[lang] = await r.json();
+      } else {
+        throw new Error('not found');
+      }
+    } catch(e) {
+      // Fall back to localStorage
+      const stored = localStorage.getItem(`stoud-content-${lang}`);
+      CONTENT[lang] = stored ? JSON.parse(stored) : makeEmpty(lang);
+    }
+  }
+  updateFillIndicators();
+  renderPage();
+}
+
+function makeEmpty(lang) {
+  return {
+    lang, dir: 'ltr',
+    nav: { home:'', about:'', people:'', expertise:'', career:'', contact:'' },
+    about: { title:'', meta_description:'', body:['','',''] },
+    expertise: { title:'', meta_description:'', sections: Array(5).fill(null).map(()=>({heading:'',body:''})) },
+    career: { title:'', meta_description:'', body:['','','',''] },
+    contact: { title:'', meta_description:'', intro:'', sections:[
+      {heading:'',lines:['']},{heading:'',lines:['','']},{heading:'',lines:['','']}
+    ]},
+    people: { title:'', meta_description:'', persons: [
+      {id:'lars',name:'Lars Henrik Stoud Platou',role:'',email:'lp@stoud.com',phone:'+47 918 14 495',linkedin:'#',bio:['','',''],badge:{year:'2025',name:'IP STARS',tier:'IP Star'}},
+      {id:'espen',name:'Espen Riseng',role:'',email:'er@stoud.com',phone:'+47 413 45 151',linkedin:'#',bio:['',''],badge:{year:'2025',name:'IP STARS',tier:'Rising Star'}},
+      {id:'ivar',name:'Ivar Hillestad',role:'',email:'ih@stoud.com',phone:'+47 924 68 681',linkedin:'#',bio:['','',''],badge:null}
+    ]}
+  };
+}
+
+// ── fill indicator ──
+function countFill(langData) {
+  if (!langData) return {filled:0,total:1};
+  let filled=0, total=0;
+  function check(v){
+    if(typeof v === 'string'){total++;if(v.trim())filled++;}
+    else if(Array.isArray(v)){v.forEach(check);}
+    else if(v && typeof v==='object'){Object.values(v).forEach(check);}
+  }
+  ['about','expertise','career','contact','people'].forEach(p=>check(langData[p]));
+  return {filled,total};
+}
+
+function updateFillIndicators() {
+  ['en','ja','zh'].forEach(lang => {
+    const {filled,total} = countFill(CONTENT[lang]);
+    const pct = total ? Math.round(filled/total*100) : 0;
+    const el = document.getElementById(`fill-${lang}`);
+    if (el) {
+      el.textContent = `${pct}%`;
+      el.className = `lang-fill${pct===100?' complete':''}`;
+    }
+  });
+}
+
+// ── navigation ──
+function switchLang(lang) {
+  saveCurrent();
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  renderPage();
+}
+function switchPage(page) {
+  saveCurrent();
+  currentPage = page;
+  document.querySelectorAll('.page-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+  renderPage();
+}
+
+// ── auto-save ──
+let saveTimer;
+function scheduleAutoSave() {
+  clearTimeout(saveTimer);
+  document.getElementById('save-status').textContent = 'Unsaved changes…';
+  document.getElementById('save-status').className = 'save-status';
+  saveTimer = setTimeout(saveCurrent, 1200);
+}
+
+async function saveCurrent() {
+  if (!CONTENT[currentLang]) return;
+  collectFormValues();
+  updateFillIndicators();
+  const st = document.getElementById('save-status');
+  try {
+    const r = await fetch('/api/content/'+currentLang, {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(CONTENT[currentLang])
+    });
+    const j = await r.json();
+    if (j.ok) {
+      st.textContent = 'Saved ✓';
+      st.className = 'save-status saved';
+      setTimeout(()=>{ st.textContent='All changes saved'; st.className='save-status'; },2000);
+    } else {
+      st.textContent = 'Save failed';
+      st.className = 'save-status';
+    }
+  } catch(e) {
+    st.textContent = 'Connection error';
+  }
+}
+
+// ── collect values from form into CONTENT ──
+function collectFormValues() {
+  const data = CONTENT[currentLang];
+  if (!data) return;
+  const page = currentPage;
+
+  if (page === 'nav') {
+    ['home','about','people','expertise','career','contact'].forEach(k => {
+      const el = document.getElementById(`nav-${k}`);
+      if (el) data.nav[k] = el.value;
+    });
+    return;
+  }
+
+  const pageData = data[page];
+  if (!pageData) return;
+
+  // title
+  const titleEl = document.getElementById('field-title');
+  if (titleEl) pageData.title = titleEl.value;
+  const metaEl = document.getElementById('field-meta');
+  if (metaEl) pageData.meta_description = metaEl.value;
+
+  if (page === 'about' || page === 'career') {
+    pageData.body.forEach((_, i) => {
+      const el = document.getElementById(`body-${i}`);
+      if (el) pageData.body[i] = el.value;
+    });
+  }
+  if (page === 'expertise') {
+    pageData.sections.forEach((s, i) => {
+      const hEl = document.getElementById(`section-${i}-heading`);
+      const bEl = document.getElementById(`section-${i}-body`);
+      if (hEl) s.heading = hEl.value;
+      if (bEl) s.body = bEl.value;
+    });
+  }
+  if (page === 'contact') {
+    const introEl = document.getElementById('contact-intro');
+    if (introEl) pageData.intro = introEl.value;
+    pageData.sections.forEach((s, i) => {
+      const hEl = document.getElementById(`cs-${i}-heading`);
+      if (hEl) s.heading = hEl.value;
+      s.lines.forEach((_, j) => {
+        const lEl = document.getElementById(`cs-${i}-line-${j}`);
+        if (lEl) s.lines[j] = lEl.value;
+      });
+    });
+  }
+  if (page === 'people') {
+    pageData.persons.forEach((p, i) => {
+      const roleEl = document.getElementById(`person-${i}-role`);
+      if (roleEl) p.role = roleEl.value;
+      p.bio.forEach((_, j) => {
+        const bEl = document.getElementById(`person-${i}-bio-${j}`);
+        if (bEl) p.bio[j] = bEl.value;
+      });
+    });
+  }
+}
+
+// ── render ──
+function renderPage() {
+  const data = CONTENT[currentLang];
+  const langLabel = `${LANG_FLAGS[currentLang]} ${LANG_NAMES[currentLang]}`;
+  const main = document.getElementById('main');
+
+  if (!data) {
+    main.innerHTML = `<div class="empty-state"><p>No content loaded for ${langLabel}.</p></div>`;
+    return;
+  }
+
+  const pages = {
+    about: renderAbout,
+    expertise: renderExpertise,
+    career: renderCareer,
+    contact: renderContact,
+    people: renderPeople,
+    nav: renderNav,
+  };
+
+  main.innerHTML = (pages[currentPage] || (() => ''))(data, langLabel);
+
+  // bind change events
+  main.querySelectorAll('input,textarea').forEach(el => {
+    el.addEventListener('input', scheduleAutoSave);
+    checkEmpty(el);
+    el.addEventListener('input', () => checkEmpty(el));
+  });
+
+  // update progress
+  updateProgress(data[currentPage]);
+}
+
+function checkEmpty(el) {
+  el.classList.toggle('empty', !el.value.trim() && currentLang !== 'en');
+}
+
+function updateProgress(pageData) {
+  if (!pageData) return;
+  const {filled,total} = countFill(pageData);
+  const pct = total ? Math.round(filled/total*100) : 100;
+  const bar = document.getElementById('page-progress');
+  if (bar) bar.style.width = pct+'%';
+  const pctEl = document.getElementById('page-pct');
+  if (pctEl) pctEl.textContent = pct+'%';
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function pageHeader(title, langLabel, page) {
+  const d = CONTENT[currentLang][page];
+  const {filled,total} = countFill(d);
+  const pct = total ? Math.round(filled/total*100) : 100;
+  return `
+  <div class="main-header">
+    <div>
+      <div class="main-title">${title} <span style="font-weight:300;color:var(--grey-1)">${langLabel}</span></div>
+      <div class="main-subtitle" style="display:flex;align-items:center;gap:12px;margin-top:6px">
+        <span id="page-pct">${pct}%</span> complete
+        <div class="progress-bar" style="flex:1;max-width:200px"><div class="progress-fill" id="page-progress" style="width:${pct}%"></div></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="importJSON()">↺ Reload from server</button>
+      <button class="btn btn-primary" onclick="exportJSON('${currentLang}')">✓ Save to server</button>
+    </div>
+  </div>`;
+}
+
+function field(id, label, value, type='input', hint='') {
+  const isEmpty = !String(value||'').trim() && currentLang !== 'en';
+  const cls = isEmpty ? ' empty' : '';
+  const hintHtml = hint ? `<span class="field-hint">— ${hint}</span>` : '';
+  if (type === 'textarea') {
+    return `<div class="field field-group">
+      <div class="field-label">${label}${hintHtml}</div>
+      <textarea id="${id}" class="${cls}" rows="3">${esc(value)}</textarea>
+    </div>`;
+  }
+  return `<div class="field field-group">
+    <div class="field-label">${label}${hintHtml}</div>
+    <input id="${id}" type="text" value="${esc(value)}" class="${cls}" />
+  </div>`;
+}
+
+function renderAbout(data, langLabel) {
+  const p = data.about;
+  return pageHeader('About', langLabel, 'about') + `
+  ${field('field-title','Page title',p.title)}
+  ${field('field-meta','Meta description',p.meta_description,'textarea','used in search results')}
+  <div class="section-card">
+    <div class="section-card-header"><span class="section-card-num">Body text</span></div>
+    <div class="section-card-body">
+      ${p.body.map((t,i)=>field(`body-${i}`,`Paragraph ${i+1}`,t,'textarea')).join('')}
+    </div>
+  </div>`;
+}
+
+function renderExpertise(data, langLabel) {
+  const p = data.expertise;
+  return pageHeader('Expertise', langLabel, 'expertise') + `
+  ${field('field-title','Page title',p.title)}
+  ${field('field-meta','Meta description',p.meta_description,'textarea','used in search results')}
+  ${p.sections.map((s,i)=>`
+  <div class="section-card">
+    <div class="section-card-header"><span class="section-card-num">Section ${i+1}</span></div>
+    <div class="section-card-body">
+      ${field(`section-${i}-heading`,'Heading',s.heading)}
+      ${field(`section-${i}-body`,'Body text',s.body,'textarea')}
+    </div>
+  </div>`).join('')}`;
+}
+
+function renderCareer(data, langLabel) {
+  const p = data.career;
+  return pageHeader('Career', langLabel, 'career') + `
+  ${field('field-title','Page title',p.title)}
+  ${field('field-meta','Meta description',p.meta_description,'textarea','used in search results')}
+  <div class="section-card">
+    <div class="section-card-header"><span class="section-card-num">Body text</span></div>
+    <div class="section-card-body">
+      ${p.body.map((t,i)=>field(`body-${i}`,`Paragraph ${i+1}`,t,'textarea')).join('')}
+    </div>
+  </div>`;
+}
+
+function renderContact(data, langLabel) {
+  const p = data.contact;
+  return pageHeader('Contact', langLabel, 'contact') + `
+  ${field('field-title','Page title',p.title)}
+  ${field('field-meta','Meta description',p.meta_description,'textarea','used in search results')}
+  ${field('contact-intro','Introduction paragraph',p.intro,'textarea')}
+  ${p.sections.map((s,i)=>`
+  <div class="section-card">
+    <div class="section-card-header"><span class="section-card-num">Section ${i+1}</span></div>
+    <div class="section-card-body">
+      ${field(`cs-${i}-heading`,'Section heading',s.heading)}
+      ${s.lines.map((l,j)=>field(`cs-${i}-line-${j}`,`Line ${j+1}`,l)).join('')}
+    </div>
+  </div>`).join('')}`;
+}
+
+function renderPeople(data, langLabel) {
+  const p = data.people;
+  const PHOTOS = {
+    lars: 'https://stoud.com/_assets/v11/29d4c3c9651b68ac8d900707ca4a85ede00095ee.png',
+    espen: 'https://stoud.com/_assets/v11/b1645184786e6fcc33fbc537f34a0faafa00b2b4.png',
+    ivar: 'https://stoud.com/_assets/v11/ef795c692f71fae5b2b3945814dcbd459160421a.png',
+  };
+  return pageHeader('People', langLabel, 'people') + `
+  ${field('field-title','Page title',p.title)}
+  ${field('field-meta','Meta description',p.meta_description,'textarea','used in search results')}
+  ${p.persons.map((person,i)=>`
+  <div class="person-card">
+    <div class="person-card-header">
+      <img class="person-avatar" src="${PHOTOS[person.id]||''}" alt="${esc(person.name)}" />
+      <span class="person-card-name">${esc(person.name)}</span>
+    </div>
+    <div class="person-card-body">
+      <div class="full">${field(`person-${i}-role`,'Job title / Role',person.role,'input','e.g. Attorney-at-Law / Partner')}</div>
+      ${person.bio.map((b,j)=>`<div class="full">${field(`person-${i}-bio-${j}`,`Bio paragraph ${j+1}`,b,'textarea')}</div>`).join('')}
+    </div>
+  </div>`).join('')}`;
+}
+
+function renderNav(data, langLabel) {
+  return pageHeader('Navigation labels', langLabel, 'nav') + `
+  <p style="font-size:13px;color:var(--grey-1);margin-bottom:24px;line-height:1.7">
+    These labels appear in the main navigation menu and the mobile menu on all pages.
+  </p>
+  ${['home','about','people','expertise','career','contact'].map(k=>
+    field(`nav-${k}`,k.charAt(0).toUpperCase()+k.slice(1),data.nav[k])
+  ).join('')}`;
+}
+
+// ── export ──
+function exportJSON(lang) {
+  currentLang = lang;
+  saveCurrent();
+  showToast('Saving ' + LANG_NAMES[lang] + ' content to server…');
+}
+
+// ── import ──
+function importJSON() {
+  loadAll().then(() => showToast('Reloaded from server ✓'));
+}
+
+// ── toast ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3800);
+}
+
+// ── init (server version — checks session via API) ──
+async function logout() {
+  await fetch('/api/logout', { method: 'POST' });
+  location.reload();
+}
+(async () => {
+  try {
+    const r = await fetch('/api/auth');
+    const j = await r.json();
+    if (j.authenticated) { loadAll(); return; }
+  } catch(e) {}
+  document.getElementById('login-overlay').style.display = 'flex';
+})();
+</script>
+
+<div id="login-overlay" style="display:none;position:fixed;inset:0;background:#0b0b0c;
+  align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:20px">
+  <div style="color:#f1f1ef;font-family:'Lato',sans-serif;font-weight:900;font-size:22px;
+    letter-spacing:-.01em;margin-bottom:8px">STOUD.</div>
+  <div style="color:rgba(241,241,239,.5);font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;margin-bottom:16px">Content Editor</div>
+  <div style="display:flex;flex-direction:column;gap:12px;width:280px">
+    <input id="login-input" type="password" placeholder="Password"
+      autocomplete="current-password"
+      style="padding:12px 16px;border:1px solid rgba(241,241,239,.2);border-radius:8px;
+      background:rgba(241,241,239,.06);color:#f1f1ef;font-family:inherit;font-size:14px;
+      outline:none;letter-spacing:.04em"
+      onfocus="this.style.borderColor='rgba(241,241,239,.5)'"
+      onblur="this.style.borderColor='rgba(241,241,239,.2)'"
+      onkeydown="if(event.key==='Enter')doLogin()" />
+    <button onclick="doLogin()"
+      style="padding:11px;border-radius:8px;background:#f1f1ef;color:#0b0b0c;
+      border:none;font-family:inherit;font-size:12px;letter-spacing:.12em;
+      text-transform:uppercase;cursor:pointer;font-weight:700">Sign in</button>
+    <div id="login-error"
+      style="color:#e07070;font-size:12px;text-align:center;letter-spacing:.06em;
+      display:none"></div>
+  </div>
+</div>
+
+<script>
+async function doLogin() {
+  const pw = document.getElementById('login-input').value;
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  if (!pw) return;
+  try {
+    const r = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    const j = await r.json();
+    if (j.ok) {
+      document.getElementById('login-overlay').style.display = 'none';
+      loadAll();
+    } else {
+      errEl.textContent = j.error || 'Incorrect password';
+      errEl.style.display = 'block';
+      document.getElementById('login-input').value = '';
+      document.getElementById('login-input').focus();
+    }
+  } catch(e) {
+    errEl.textContent = 'Connection error — is the server running?';
+    errEl.style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "people": "People",
+    "expertise": "Expertise",
+    "career": "Career",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "About.",
+    "meta_description": "At STOUD we set the new standard for intellectual property law in Norway, blending tradition with forward-thinking innovation.",
+    "body": [
+      "At STOUD, we set the new standard for intellectual property law in Norway. We combine agility with professionalism, delivering legal services with a precision and responsiveness rarely found in the market. For international clients with interests in Norway and the EU, we are the trusted partner of choice, offering a service that blends tradition with forward-thinking innovation.",
+      "Our services extend beyond intellectual property into the realm of corporate law, including mergers and acquisitions, contract law, and comprehensive due diligence. By combining corporate legal knowledge with long-standing expertise in trademark prosecution and portfolio management, we offer a breadth of service rarely matched in the Norwegian market.",
+      "Through an extensive international network, we are able to manage matters seamlessly across jurisdictions, ensuring that clients benefit from consistent quality and strategy on a global scale. By leveraging AI and proprietary technology tailored for the future of the IP industry, we deliver what larger, more traditional firms cannot. We quietly lead, giving our clients the assurance that, together with STOUD, they are always one step ahead."
+    ]
+  },
+  "expertise": {
+    "title": "Expertise.",
+    "meta_description": "Full-spectrum IP practice: trademark prosecution, patents, design protection, trade secrets, corporate M&A, competition law, and dispute resolution.",
+    "sections": [
+      {
+        "heading": "Trademark Prosecution and Portfolio Management",
+        "body": "STOUD offers the full spectrum of trademark services, from clearance searches and planning global filing strategies, domestic/international prosecution and robust enforcement where needed. We ensure that trademark portfolios are managed seamlessly and efficiently, while providing a strategic advantage."
+      },
+      {
+        "heading": "Patents, Designs and Trade Secrets",
+        "body": "While trademarks remain central, our practice extends across the full spectrum of intellectual property law. We advise on design protection, patent strategy and licensing, as well as the safeguarding of trade secrets and know-how. Whether through registration, contractual structuring, or enforcement, we ensure that intangible assets are protected and leveraged as core business drivers. This breadth allows us to deliver integrated IP solutions that align with broader corporate and commercial goals."
+      },
+      {
+        "heading": "Marketing and Competition Law",
+        "body": "We provide expert guidance in navigating complex marketing and competition law landscapes. Our services cover compliance with advertising regulations, strategic enforcement of competitive positioning, and action against counterfeits and other forms of unfair competition. We deliver tailored solutions that protect and enhance market presence efficiently."
+      },
+      {
+        "heading": "Corporate Law and M&A",
+        "body": "Our expertise covers mergers and acquisitions, commercial contract and corporate law, as well as comprehensive due diligence procedures. We conduct both traditional and IP-centric due diligence, ensuring transactions are executed with precision and strategic foresight. By combining corporate legal capability with technical and specialised competence in IP prosecution and portfolio management, we offer an edge that is uncommon in the marketplace."
+      },
+      {
+        "heading": "Dispute Resolution and Litigation",
+        "body": "Our team is exclusively composed of licensed attorneys admitted to the Norwegian Bar, with full rights of audience before Norwegian courts, arbitration panels, and other dispute resolution forums. We have extensive experience handling conflicts both domestically and internationally, including complex matters arising from infringement, breach, or commercial disputes in a wide variety of sectors."
+      }
+    ]
+  },
+  "career": {
+    "title": "Work at STOUD.",
+    "meta_description": "Work at STOUD. We look for commercially focused lawyers committed to uncompromising professional standards in IP and corporate law.",
+    "body": [
+      "At STOUD we believe that excellence in law requires more than only excellent academic skills. Our lawyers combine legal precision with commercial understanding, and we expect the same from anyone who joins us. We look for individuals who are commercially focused, efficient and committed to uncompromising professional standards.",
+      "Intellectual property and corporate law are demanding fields, and at STOUD, we handle work that requires both sharp legal analysis and the ability to see the broader business perspective.",
+      "We are selective in our recruitment.",
+      "If you believe you may be a suitable candidate, you are welcome to get in touch in confidence at info@stoud.com"
+    ]
+  },
+  "contact": {
+    "title": "Contact.",
+    "meta_description": "STOUD AS, Bryggen 3, 5003 Bergen, Norway. Reach us at info@stoud.com or +47 55 91 5000.",
+    "intro": "STOUD AS is headquartered at Bryggen in Bergen, a UNESCO World Heritage Site, serving clients nationally and globally. Through our international network we are able to handle matters in all jurisdictions.",
+    "sections": [
+      {
+        "heading": "Visiting address",
+        "lines": ["Bryggen 3 — 5003 Bergen Norway"]
+      },
+      {
+        "heading": "Postal address",
+        "lines": [
+          "STOUD AS, Bryggen 3, 5003 Bergen Norway",
+          "Norwegian company registration no: 935 801 966"
+        ]
+      },
+      {
+        "heading": "E-mail and agent inquiries",
+        "lines": ["info@stoud.com", "+ 47 55 91 5000"]
+      }
+    ]
+  },
+  "people": {
+    "title": "People.",
+    "meta_description": "Meet the founding partners of STOUD — licensed attorneys specialising in trademarks, intellectual property, and corporate law in Norway.",
+    "persons": [
+      {
+        "id": "lars",
+        "name": "Lars Henrik Stoud Platou",
+        "role": "Attorney-at-Law / Partner",
+        "email": "lp@stoud.com",
+        "phone": "+47 918 14 495",
+        "linkedin": "#",
+        "bio": [
+          "Lars Henrik Stoud Platou is a licensed attorney and founding partner at STOUD. He specialises in trademarks, licensing, commercial contracts and disputes, with extensive expertise in portfolio management, prosecution and corporate law.",
+          "He has been recognised multiple times by Managing IP as an IP Star, individually ranked in the IAM Patent 1000, and listed by World Trademark Review as a Recommended Individual.",
+          "Trusted by major international clients, Lars is recognised for delivering precise, strategic and uncompromising advice on securing and enforcing trademark and IP rights. He combines deep legal expertise with a professional, corporate edge, ensuring guidance that withstands the most complex and high-stakes commercial settings."
+        ],
+        "badge": { "year": "2025", "name": "IP STARS", "tier": "IP Star" }
+      },
+      {
+        "id": "espen",
+        "name": "Espen Riseng",
+        "role": "Attorney-at-Law / CEO & Partner",
+        "email": "er@stoud.com",
+        "phone": "+47 413 45 151",
+        "linkedin": "#",
+        "bio": [
+          "Espen Riseng is a licensed attorney and founding partner at STOUD. His practice spans the full spectrum of intellectual property law, including patents, trademarks, and copyright, alongside significant expertise in technology law covering privacy, IT contracts, and domain names. He is recognised by Managing IP as a Rising Star in intellectual property. Espen has served with the Norwegian Board of Appeal for Industrial Property Rights (KFIR), including the Mediation Board for Employee Inventions. He has also worked in-house in an AI startup, gaining first-hand insight into the intersection of emerging technology and law.",
+          "This background, combined with his focus on IP and technology law, gives him a strong platform for advising on complex matters. At STOUD, Espen advises both domestic and international clients and is recognised for delivering precise, commercially attuned counsel across complex cross-border cases."
+        ],
+        "badge": { "year": "2025", "name": "IP STARS", "tier": "Rising Star" }
+      },
+      {
+        "id": "ivar",
+        "name": "Ivar Hillestad",
+        "role": "Attorney-at-Law / Partner",
+        "email": "ih@stoud.com",
+        "phone": "+47 924 68 681",
+        "linkedin": "#",
+        "bio": [
+          "Ivar Hillestad is a licensed attorney and founding partner at STOUD. With more than two decades of experience in corporate law, he advises on mergers and acquisitions, strategic transactions, and comprehensive due diligence. His practice includes board advisory, restructuring, litigation, and corporate governance.",
+          "Recognised for his expertise in corporate law, transactions, and negotiations, Ivar combines precise legal analysis with clear commercial direction. Alongside his legal career, Ivar has pursued advanced studies at INSEAD and the Norwegian School of Economics, adding a distinctive strategic and commercial dimension to his legal practice.",
+          "This combination complements STOUD's technical and commercial IP expertise and enables the firm to deliver corporate services at the level expected from leading full-service firms, while retaining the focus and precision of a dedicated IP practice."
+        ],
+        "badge": null
+      }
+    ]
+  }
+}

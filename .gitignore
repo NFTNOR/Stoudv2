@@ -1,0 +1,17 @@
+# Server secrets — NEVER commit
+server/.env
+content/*.backup.json
+
+# Admin tool (local/static version)
+stoud-admin.html
+
+# Build scripts
+server/make-admin.js
+
+# Node
+node_modules/
+server/node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

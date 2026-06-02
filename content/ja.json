@@ -1,0 +1,83 @@
+{
+  "lang": "ja",
+  "dir": "ltr",
+  "nav": {
+    "home": "ホーム",
+    "about": "私たちについて",
+    "people": "メンバー",
+    "expertise": "専門分野",
+    "career": "採用情報",
+    "contact": "お問い合わせ"
+  },
+  "about": {
+    "title": "About.",
+    "meta_description": "",
+    "body": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "expertise": {
+    "title": "Expertise.",
+    "meta_description": "",
+    "sections": [
+      { "heading": "", "body": "" },
+      { "heading": "", "body": "" },
+      { "heading": "", "body": "" },
+      { "heading": "", "body": "" },
+      { "heading": "", "body": "" }
+    ]
+  },
+  "career": {
+    "title": "",
+    "meta_description": "",
+    "body": ["", "", "", ""]
+  },
+  "contact": {
+    "title": "Contact.",
+    "meta_description": "",
+    "intro": "",
+    "sections": [
+      { "heading": "", "lines": [""] },
+      { "heading": "", "lines": ["", ""] },
+      { "heading": "", "lines": ["info@stoud.com", "+ 47 55 91 5000"] }
+    ]
+  },
+  "people": {
+    "title": "People.",
+    "meta_description": "",
+    "persons": [
+      {
+        "id": "lars",
+        "name": "Lars Henrik Stoud Platou",
+        "role": "",
+        "email": "lp@stoud.com",
+        "phone": "+47 918 14 495",
+        "linkedin": "#",
+        "bio": ["", "", ""],
+        "badge": { "year": "2025", "name": "IP STARS", "tier": "IP Star" }
+      },
+      {
+        "id": "espen",
+        "name": "Espen Riseng",
+        "role": "",
+        "email": "er@stoud.com",
+        "phone": "+47 413 45 151",
+        "linkedin": "#",
+        "bio": ["", ""],
+        "badge": { "year": "2025", "name": "IP STARS", "tier": "Rising Star" }
+      },
+      {
+        "id": "ivar",
+        "name": "Ivar Hillestad",
+        "role": "",
+        "email": "ih@stoud.com",
+        "phone": "+47 924 68 681",
+        "linkedin": "#",
+        "bio": ["", "", ""],
+        "badge": null
+      }
+    ]
+  }
+}
