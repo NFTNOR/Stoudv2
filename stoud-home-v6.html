@@ -176,8 +176,7 @@
   .moon{fill:var(--ink)}
   .ripple{fill:none;stroke:var(--ink);stroke-width:1.2}
   .ring-text{font-family:'Lato';font-weight:700;font-size:6px;letter-spacing:1.6px;
-    fill:var(--ink);opacity:0;transition:opacity .55s var(--ease);text-transform:uppercase}
-  .wordmark:hover .ring-text{opacity:.6}
+    fill:var(--ink);opacity:.6;text-transform:uppercase}
   @keyframes rise{to{opacity:1;transform:none}}
   @keyframes sealin{from{opacity:0}to{opacity:1}}
 
@@ -276,6 +275,7 @@
     border-radius:0 0 8px 8px;text-decoration:none;font-size:12px;
     letter-spacing:.1em;text-transform:uppercase;transition:top .2s}
   .skip-link:focus{top:0}
+
 </style>
 </head>
 <body>
@@ -300,7 +300,7 @@
           <g class="seal">
             <g class="ring-text">
               <animateTransform attributeName="transform" type="rotate" from="0 442 74" to="360 442 74" dur="26s" repeatCount="indefinite"/>
-              <text><textPath href="#microring" startOffset="0">STOUD · TRADEMARK · INTELLECTUAL PROPERTY · REGISTERED · </textPath></text>
+              <text><textPath href="#microring" startOffset="0">Trademark &amp; IP Law Services · Trademark &amp; IP Law Services ·</textPath></text>
             </g>
             <circle class="orbit-ring" cx="442" cy="74" r="20"/>
             <circle class="ripple" cx="442" cy="74" r="8">
